@@ -22,6 +22,15 @@ namespace KetoLibrary.Test.Xml
             var isValid = validator.IsValid(@"C:\Users\satal_000\Documents\GitHub\XmlFileExplorer\trunk\Test Files\PurchaseOrder\Valid PurchaseOrder1.xml");
             Assert.IsTrue(isValid);
         }
+        
+        [TestMethod]
+        public void IsValidReturnsTrueForReadOnlyValidXml()
+        {
+            var validator = new XsdValidator();
+            validator.AddSchema(@"C:\Users\satal_000\Documents\GitHub\XmlFileExplorer\trunk\Test Files\PurchaseOrder\PurchaseOrder.xsd");
+            var isValid = validator.IsValid(@"C:\Users\satal_000\Documents\GitHub\XmlFileExplorer\trunk\Test Files\PurchaseOrder\Valid ReadOnlyPurchaseOrder1.xml");
+            Assert.IsTrue(isValid);
+        }
 
         [TestMethod]
         public void IsValidReturnsFalseForInvalidXml()

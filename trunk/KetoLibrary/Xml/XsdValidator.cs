@@ -34,7 +34,7 @@ namespace KetoLibrary.Xml
 
             XmlSchema schema;
 
-            using (var fs = new FileStream(schemaFileLocation, FileMode.Open))
+            using (var fs = File.OpenRead(schemaFileLocation))
             {
                 schema = XmlSchema.Read(fs, ValidationEventHandler);
             }
@@ -61,7 +61,7 @@ namespace KetoLibrary.Xml
                 throw new FileNotFoundException("The specified XML file does not exist", xmlLocation);
             }
 
-            using (var xmlStream = new FileStream(xmlLocation, FileMode.Open))
+            using (var xmlStream = File.OpenRead(xmlLocation))
             {
                 return IsValid(xmlStream);
             }
