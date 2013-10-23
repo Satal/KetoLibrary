@@ -46,7 +46,19 @@ namespace KetoLibrary.Xml
                     return default(T);
                 }
 
-                return (T)serializer.Deserialize(xmlReader);
+                var deserialized = default(T);
+
+                try
+                {
+                    deserialized = (T)serializer.Deserialize(xmlReader);
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    // We had an issue while deserializing the XML document, this is probably that the
+                    // XML was not structured properly i.e. missing the end doc tag
+                }
+
+                return deserialized;
             }
         }
 
