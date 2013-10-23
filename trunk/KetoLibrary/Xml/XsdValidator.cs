@@ -25,6 +25,9 @@ namespace KetoLibrary.Xml
         /// <returns>True if the schema file was successfully loaded, else false (if false, view Errors/Warnings for reason why)</returns>
         public bool AddSchema(string schemaFileLocation)
         {
+            if (String.IsNullOrEmpty(schemaFileLocation)) return false;
+            if (!File.Exists(schemaFileLocation)) return false;
+
             // Reset the Error/Warning collections
             Errors = new List<string>();
             Warnings = new List<string>();
@@ -88,7 +91,14 @@ namespace KetoLibrary.Xml
 
             var xmlFile = XmlReader.Create(xmlStream, settings);
 
-            while (xmlFile.Read()) { }
+            try
+            {
+                while (xmlFile.Read()) { }
+            }
+            catch (XmlException xex)
+            {
+                Errors.Add(xex.Message);
+            }
 
             return !Errors.Any() && !Warnings.Any();
         }

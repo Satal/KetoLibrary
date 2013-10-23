@@ -20,7 +20,7 @@ namespace KetoLibrary.Xml
 
             var serializer = GetSerializer<T>();
 
-            using (var stringWriter = new StringWriter())
+            var stringWriter = new StringWriter();
             using (var xmlWriter = XmlWriter.Create(stringWriter))
             {
                 serializer.Serialize(xmlWriter, obj);
@@ -38,7 +38,7 @@ namespace KetoLibrary.Xml
 
             var serializer = GetSerializer<T>();
 
-            using (var stringReader = new StringReader(val))
+            var stringReader = new StringReader(val);
             using (var xmlReader = XmlReader.Create(stringReader))
             {
                 if (!serializer.CanDeserialize(xmlReader))
