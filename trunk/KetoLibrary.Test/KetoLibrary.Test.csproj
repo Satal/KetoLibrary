@@ -61,6 +61,25 @@
       <Name>KetoLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DataFiles\Xml\Products\SchemaDoc1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataFiles\Xml\Products\SchemaDoc2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataFiles\Xml\PurchaseOrder\PurchaseOrder.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataFiles\Xml\Products\InvalidXmlDoc1.xml" />
+    <Content Include="DataFiles\Xml\Products\ValidXmlDoc1.xml" />
+    <Content Include="DataFiles\Xml\PurchaseOrder\Invalid PurchaseOrder XML.xml" />
+    <Content Include="DataFiles\Xml\PurchaseOrder\Invalid PurchaseOrder1.xml" />
+    <Content Include="DataFiles\Xml\PurchaseOrder\Valid PurchaseOrder1.xml" />
+    <Content Include="DataFiles\Xml\PurchaseOrder\Valid ReadOnlyPurchaseOrder1.xml" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
@@ -81,6 +100,9 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /Y /S "$(SolutionDir)KetoLibrary.Test\DataFiles\*" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
